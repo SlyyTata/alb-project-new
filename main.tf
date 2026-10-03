@@ -28,8 +28,8 @@ resource "aws_internet_gateway" "alb_igw" {
   vpc_id = aws_vpc.alb_vpc.id
 }
 
-resource "aws_route_table" "alb_route_table" {
-  vpc_id = aws_vpc.alb_vpc.id
+resource "aws_default_route_table" "alb_route_table" {
+  default_route_table_id = aws_vpc.alb_vpc.default_route_table_id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -51,7 +51,7 @@ resource "aws_instance" "example" {
 
   user_data = <<-EOF
               #!/bin/bash
-              apt-get update
+              apt-get update -y
               apt-get install -y nginx
               systemctl start nginx
               systemctl enable nginx
@@ -154,4 +154,10 @@ resource "aws_lb_listener" "http" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target_group.arn
   }
+}
+
+resource "aws_lb_target_group_attachment" "target_group_attachment" {
+  target_group_arn = aws_lb_target_group.target_group.arn
+  target_id        = aws_instance.example.id
+  port             = 80
 }
