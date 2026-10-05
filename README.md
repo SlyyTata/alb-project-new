@@ -42,7 +42,7 @@ terraform validate
 ```
 
 ### 3. Generate an Execution Plan
-Review the resources that Terraform intends to create, modify, or destroy.
+Review the resources that Terraform intends to create, modify or destroy.
 ```bash
 terraform plan
 ```
@@ -65,7 +65,7 @@ terraform apply
 
 ## 🧹 Cleanup
 
-To tear down all resources created by this project and avoid unexpected AWS charges, execute:
+To tear down all resources created by this project and avoid unexpected AWS charges, execute
 ```bash
 terraform destroy
 ```
