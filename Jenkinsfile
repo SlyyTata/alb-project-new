@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        terraform 'Terraform' // Assuming 'Terraform' is the name of the Terraform installation configured in Jenkins
+    }
+
     stages {
         stage('Checkout') {
             steps {
