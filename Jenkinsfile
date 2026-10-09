@@ -5,11 +5,14 @@ pipeline {
         terraform 'Terraform' // Assuming 'Terraform' is the name of the Terraform installation configured in Jenkins
     }
 
+    environment {
+        TF_IN_AUTOMATION = 'true'
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
-                // Add checkout steps here
                 checkout scm
             }
         }
